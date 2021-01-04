@@ -1,6 +1,6 @@
 utils::globalVariables(c("test", "scannedAt", "marketValue", "ds", "y",
                          "estimate", "label", "conf.low", "conf.high", ".",
-                         "datum", "mean_y"))
+                         "datum", "mean_y", "quantity"))
 #' Import Item
 #'
 #' This function is a basic import of the raw json from the nexhyub API
@@ -76,7 +76,7 @@ clean_json <- function(json) {
       scannedAt = ymd_hms(scannedAt),
       marketValue = marketValue / 10000
     ) %>%
-    select(ds = scannedAt, y = marketValue) %>%
+    select(ds = scannedAt, y = marketValue, quantity) %>%
     mutate(item = item_name,
            server = server)
 
