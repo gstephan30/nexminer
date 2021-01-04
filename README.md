@@ -41,8 +41,6 @@ p1 <- smooth_item(rh_clean)
 p2 <- lm_item_wday(rh_clean)
 
 p1 / p2
-#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-#> Warning: Removed 1 rows containing missing values (geom_errorbarh).
 ```
 
 <img src="man/figures/README-example1-1.png" style="display: block; margin: auto;" />
@@ -54,8 +52,42 @@ p3 <- smooth_item(bl_clean)
 p4 <- lm_item_wday(bl_clean)
 
 p3 / p4
-#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-#> Warning: Removed 1 rows containing missing values (geom_errorbarh).
 ```
 
 <img src="man/figures/README-example2-1.png" style="display: block; margin: auto;" />
+
+Or just loop over multiple items:
+
+``` r
+library(dplyr)
+library(purrr)
+
+flasks <- c("Flask of the Titans", "Flask of Distilled Wisdom", 
+            "Flask of Supreme Power", "Flask of Chromatic Resistance",
+            "Flask of Petrification")
+
+flasks_df <- flasks %>%
+  map_df(function (x)
+    import_item(x, server, fraction) %>% 
+      clean_json()
+    )
+
+# count of times where flasks are captured
+flasks_df %>% 
+  count(item, sort = TRUE)
+#> # A tibble: 5 x 2
+#>   item                              n
+#>   <chr>                         <int>
+#> 1 Flask of the Titans            6085
+#> 2 Flask of Supreme Power         6074
+#> 3 Flask of Distilled Wisdom      5933
+#> 4 Flask of Petrification          480
+#> 5 Flask of Chromatic Resistance   420
+
+flasks_df %>% 
+  group_split(item) %>% 
+  map(smooth_item) %>% 
+  wrap_plots(ncol = 1)
+```
+
+<img src="man/figures/README-flasks-1.png" style="display: block; margin: auto;" />
