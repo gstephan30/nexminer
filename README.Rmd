@@ -9,7 +9,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-", 
-  fig.align = "center"
+  fig.align = "center",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -55,5 +57,33 @@ p3 <- smooth_item(bl_clean)
 p4 <- lm_item_wday(bl_clean)
 
 p3 / p4
+```
+
+Or just loop over multiple items:
+
+```{r flasks, fig.height=12}
+library(dplyr)
+library(purrr)
+
+flasks <- c("Flask of the Titans", "Flask of Distilled Wisdom", 
+            "Flask of Supreme Power", "Flask of Chromatic Resistance",
+            "Flask of Petrification")
+
+flasks_df <- flasks %>%
+  map_df(function (x)
+    import_item(x, server, fraction) %>% 
+      clean_json()
+    )
+
+# count of times where flasks are captured
+flasks_df %>% 
+  count(item, sort = TRUE)
+
+flasks_df %>% 
+  group_split(item) %>% 
+  map(smooth_item) %>% 
+  wrap_plots(ncol = 1)
+
+
 ```
 

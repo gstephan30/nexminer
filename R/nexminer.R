@@ -16,6 +16,16 @@ utils::globalVariables(c("test", "scannedAt", "marketValue", "ds", "y",
 #'
 #' @export
 import_item <- function(item_string, server, faction) {
+  if (length(item_string) != 1) {
+    stop("Please provide just one item.")
+  }
+  if (length(server) != 1) {
+    stop("Please provide just one server.")
+  }
+  if (length(faction) != 1) {
+    stop("Please provide just one faction.")
+  }
+
   item <- item_string %>%
     str_to_lower() %>%
     str_replace_all(., " ", "-")
@@ -73,7 +83,7 @@ clean_json <- function(json) {
 #'
 #' @param item_clean raw json item of api request - generated with import_item function
 #' @return plot of item value including smooth curve
-#' @import dplyr stringr ggplot2
+#' @import dplyr stringr ggplot2 lubridate
 #' @examples
 #'
 #' bl_raw <- import_item("black lotus", "patchwerk", "horde")
@@ -87,22 +97,28 @@ smooth_item <- function(item_clean) {
     str_replace_all(., "-", " ") %>%
     str_to_title(.)
 
-  server <- pull(item_clean, server) %>%
-    unique() %>%
-    str_replace_all(., "-", " ") %>%
-    str_to_title(.)
+  if(length(item) != 1) {
+    stop("More then one item provided, split items into groups. See ?group_split()")
+  } else {
+    server <- pull(item_clean, server) %>%
+      unique() %>%
+      str_replace_all(., "-", " ") %>%
+      str_to_title(.)
 
-  item_clean %>%
-    mutate(datum = as_date(ds)) %>%
-    group_by(datum) %>%
-    summarise(mean_y = mean(y, na.rm = TRUE)) %>%
-    ggplot(aes(datum, mean_y)) +
-    geom_line(size = 1) +
-    geom_smooth() +
-    labs(title = paste0("Price development for ", item, " on ", server),
-         y = "Average price",
-         x = "Date") +
-    theme_light()
+    df_clean <- item_clean %>%
+      mutate(datum = as_date(ds)) %>%
+      group_by(datum) %>%
+      summarise(mean_y = mean(y, na.rm = TRUE)) %>%
+      ggplot(aes(datum, mean_y)) +
+      geom_line(size = 1) +
+      geom_smooth() +
+      labs(title = paste0("Price development for ", item, " on ", server),
+           y = "Avg. price in Gold",
+           x = "Date") +
+      theme_light()
+  }
+
+  return(df_clean)
 }
 
 #' explore linear relation between price and weekday
