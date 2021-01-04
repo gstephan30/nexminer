@@ -25,7 +25,7 @@ devtools::install_github("gstephan30/nexminer")
 
 The following examples show how to import price trends of [Black
 Lotus](https://classic.wowhead.com/item=13468) or [Rugged
-Hide](https://classic.wowhead.com/item=8171)on the EU server Patchwerk
+Hide](https://classic.wowhead.com/item=8171) on the EU server Patchwerk
 Faction Horde:
 
 ``` r
@@ -36,7 +36,9 @@ server <- "patchwerk"
 fraction <- "horde"
 
 rh_raw <- import_item("rugged hide", server, fraction)
+#> [1] "Reading data for rugged-hide on patchwerk horde"
 rh_clean <- clean_json(rh_raw)
+#> [1] "Cleaning raw json data"
 p1 <- smooth_item(rh_clean)
 p2 <- lm_item_wday(rh_clean)
 
@@ -47,7 +49,9 @@ p1 / p2
 
 ``` r
 bl_raw <- import_item("Black LOTus", server, fraction)
+#> [1] "Reading data for black-lotus on patchwerk horde"
 bl_clean <- clean_json(bl_raw)
+#> [1] "Cleaning raw json data"
 p3 <- smooth_item(bl_clean)
 p4 <- lm_item_wday(bl_clean)
 
@@ -71,6 +75,16 @@ flasks_df <- flasks %>%
     import_item(x, server, fraction) %>% 
       clean_json()
     )
+#> [1] "Reading data for flask-of-the-titans on patchwerk horde"
+#> [1] "Cleaning raw json data"
+#> [1] "Reading data for flask-of-distilled-wisdom on patchwerk horde"
+#> [1] "Cleaning raw json data"
+#> [1] "Reading data for flask-of-supreme-power on patchwerk horde"
+#> [1] "Cleaning raw json data"
+#> [1] "Reading data for flask-of-chromatic-resistance on patchwerk horde"
+#> [1] "Cleaning raw json data"
+#> [1] "Reading data for flask-of-petrification on patchwerk horde"
+#> [1] "Cleaning raw json data"
 
 # count of times where flasks are captured
 flasks_df %>% 
