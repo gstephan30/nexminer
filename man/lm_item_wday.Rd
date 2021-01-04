@@ -16,7 +16,9 @@ tie-fighter plot of item value compared to the weekday
 explore linear relation between price and weekday
 }
 \examples{
-bl_raw <- import_item("black lotus", server, fraction)
+
+bl_raw <- import_item("black lotus", "patchwerk", "horde")
 bl_clean <- clean_json(bl_raw)
 lm_item_wday(bl_clean)
+
 }

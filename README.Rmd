@@ -18,34 +18,42 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of nexminer is to ...
+https://nexushub.co/ provides and [API](https://nexushub.co/developers/api/General/foo) to data mine several prices of in game items of the video game World of Warcraft Classic. The following tool simplifies R users to import the data or loop over several items. Please be reminded that all data is collected by the nexushub team and their development page can be visited [here](https://github.com/nexus-devs/wow-classic-items).
 
-## Installation
+## Install
 
-You can install the released version of nexminer from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("nexminer")
+```{r eval=FALSE}
+devtools::install_github("gstephan30/nexminer")
 ```
+
 
 ## Example
 
-https://nexushub.co/ provides and [API](https://nexushub.co/developers/api/General/foo) to data mine several prices of in game items of the video game World of Warcraft Classic. The following tool simplifies R users to import the data or loop over several items.
 
-The following examples show how to import price trends of black lotus on the EU server Patchwerk Faction Horde:
+The following examples show how to import price trends of [Black Lotus](https://classic.wowhead.com/item=13468) or [Rugged Hide](https://classic.wowhead.com/item=8171)on the EU server Patchwerk Faction Horde:
 
-```{r example}
+```{r example1}
 library(nexminer)
-library(dplyr)
-library(ggplot2)
+library(patchwork)
 
 server <- "patchwerk"
 fraction <- "horde"
 
 rh_raw <- import_item("rugged hide", server, fraction)
 rh_clean <- clean_json(rh_raw)
-smooth_item(rh_clean)
-lm_item_wday(rh_clean)
+p1 <- smooth_item(rh_clean)
+p2 <- lm_item_wday(rh_clean)
 
+p1 / p2
+```
+
+
+```{r example2}
+bl_raw <- import_item("Black LOTus", server, fraction)
+bl_clean <- clean_json(bl_raw)
+p3 <- smooth_item(bl_clean)
+p4 <- lm_item_wday(bl_clean)
+
+p3 / p4
 ```
 

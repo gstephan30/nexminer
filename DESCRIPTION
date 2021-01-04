@@ -5,8 +5,7 @@ Authors@R:
     person(given = "Stephan",
            family = "G",
            role = c("aut", "cre"),
-           email = "sg-30@gmx.net",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "sg-30@gmx.net")
 Description: Mining the Nexushub API to import price development.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -14,6 +13,15 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
-    dplyr
+    dplyr,
+    lubridate,
+    stringr,
+    jsonlite,
+    glue,
+    broom.helpers,
+    tidyr,
+    stats,
+    ggplot2,
+    tibble
 Suggests: 
     testthat

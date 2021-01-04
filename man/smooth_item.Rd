@@ -16,7 +16,9 @@ plot of item value including smooth curve
 creates smooth plot for price development
 }
 \examples{
-bl_raw <- import_item("black lotus", server, fraction)
+
+bl_raw <- import_item("black lotus", "patchwerk", "horde")
 bl_clean <- clean_json(bl_raw)
 smooth_item(bl_clean)
+
 }

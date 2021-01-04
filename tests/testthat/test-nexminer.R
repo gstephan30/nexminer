@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 
 server <- "patchwerk"
-fraction <- "horde"
+faction <- "horde"
 
 bl_raw <- import_item("black lotus", server, faction)
 bl_clean <- clean_json(bl_raw)

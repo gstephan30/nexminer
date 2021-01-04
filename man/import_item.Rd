@@ -17,9 +17,10 @@ import_item(item_string, server, faction)
 raw json of api request
 }
 \description{
-Import Item
+This function is a basic import of the raw json from the nexhyub API
 }
 \examples{
 
-import_item("black lotus", server, faction)
+import_item("black lotus", "patchwerk", "horde")
+
 }

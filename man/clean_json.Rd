@@ -16,6 +16,8 @@ clean tibble of item with value, date, server, faction and item string
 Clean raw imported item
 }
 \examples{
-bl_raw <- import_item("black lotus", server, faction)
+
+bl_raw <- import_item("black lotus", "patchwerk", "horde")
 clean_json(bl_raw)
+
 }
