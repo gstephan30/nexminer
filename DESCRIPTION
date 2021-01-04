@@ -1,0 +1,19 @@
+Package: nexminer
+Title: Mining Nexushub
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Stephan",
+           family = "G",
+           role = c("aut", "cre"),
+           email = "sg-30@gmx.net",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Mining the Nexushub API to import price development.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    dplyr
+Suggests: 
+    testthat

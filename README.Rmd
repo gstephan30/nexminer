@@ -1,0 +1,51 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# nexminer
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of nexminer is to ...
+
+## Installation
+
+You can install the released version of nexminer from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("nexminer")
+```
+
+## Example
+
+https://nexushub.co/ provides and [API](https://nexushub.co/developers/api/General/foo) to data mine several prices of in game items of the video game World of Warcraft Classic. The following tool simplifies R users to import the data or loop over several items.
+
+The following examples show how to import price trends of black lotus on the EU server Patchwerk Faction Horde:
+
+```{r example}
+library(nexminer)
+library(dplyr)
+library(ggplot2)
+
+server <- "patchwerk"
+fraction <- "horde"
+
+rh_raw <- import_item("rugged hide", server, fraction)
+rh_clean <- clean_json(rh_raw)
+smooth_item(rh_clean)
+lm_item_wday(rh_clean)
+
+```
+
