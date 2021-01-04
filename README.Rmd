@@ -32,7 +32,7 @@ devtools::install_github("gstephan30/nexminer")
 ## Example
 
 
-The following examples show how to import price trends of [Black Lotus](https://classic.wowhead.com/item=13468) or [Rugged Hide](https://classic.wowhead.com/item=8171)on the EU server Patchwerk Faction Horde:
+The following examples show how to import price trends of [Black Lotus](https://classic.wowhead.com/item=13468) or [Rugged Hide](https://classic.wowhead.com/item=8171) on the EU server Patchwerk Faction Horde:
 
 ```{r example1}
 library(nexminer)

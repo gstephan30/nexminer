@@ -33,6 +33,8 @@ import_item <- function(item_string, server, faction) {
   server <- str_to_lower(server)
   faction <- str_to_lower(faction)
 
+  print(paste0("Reading data for ", item, " on ", server, " ", faction))
+
   json_raw <- read_json(
     glue::glue(
       "https://api.nexushub.co/wow-classic/v1/items/{server}-{faction}/{item}/prices?timerange=1000"
@@ -64,6 +66,8 @@ clean_json <- function(json) {
     select(-test) %>%
     unnest(json) %>%
     unnest_wider(json)
+
+  print("Cleaning raw json data")
 
   df <- bl_clean %>%
     mutate(
