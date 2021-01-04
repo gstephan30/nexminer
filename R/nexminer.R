@@ -144,7 +144,8 @@ lm_item_wday <- function(item_clean) {
     ggplot2::geom_vline(xintercept = 0, linetype = "dashed") +
     ggplot2::geom_errorbarh(ggplot2::aes(xmin = conf.low, xmax = conf.high), height = 0.2) +
     ggplot2::theme_light() +
-    ggplot2::labs(title = paste0("Linear Regression between ", item, " value to the day of the week on ", server),
+    ggplot2::labs(title = paste0("Linear Regression between ", item, " value to the day of the week"),
+                  subtitle = paste0("for Server ", server),
                   y = "Day of the week")
 
 }

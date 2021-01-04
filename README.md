@@ -45,7 +45,7 @@ p1 / p2
 #> Warning: Removed 1 rows containing missing values (geom_errorbarh).
 ```
 
-<img src="man/figures/README-example1-1.png" width="100%" />
+<img src="man/figures/README-example1-1.png" style="display: block; margin: auto;" />
 
 ``` r
 bl_raw <- import_item("Black LOTus", server, fraction)
@@ -58,4 +58,4 @@ p3 / p4
 #> Warning: Removed 1 rows containing missing values (geom_errorbarh).
 ```
 
-<img src="man/figures/README-example2-1.png" width="100%" />
+<img src="man/figures/README-example2-1.png" style="display: block; margin: auto;" />
