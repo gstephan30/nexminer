@@ -10,7 +10,7 @@ clean_json(json)
 \item{json}{raw json item of api request - generated with import_item function}
 }
 \value{
-clean tibble of item with value, date, server, faction and item string
+clean tibble of item with value, date, server, faction, item ID and item name
 }
 \description{
 Clean raw imported item

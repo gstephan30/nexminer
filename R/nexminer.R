@@ -47,7 +47,7 @@ import_item <- function(item_string, server, faction) {
 #' Clean raw imported item
 #'
 #' @param json raw json item of api request - generated with import_item function
-#' @return clean tibble of item with value, date, server, faction and item string
+#' @return clean tibble of item with value, date, server, faction, item ID and item name
 #' @import dplyr tidyr lubridate stringr
 #'
 #' @examples
@@ -59,6 +59,7 @@ import_item <- function(item_string, server, faction) {
 clean_json <- function(json) {
   item_name <- json$name
   server <- json$slug
+  itemid <- json$itemId
 
   bl_clean <- tibble(json = json) %>%
     mutate(test = lengths(json)) %>%
@@ -78,7 +79,8 @@ clean_json <- function(json) {
     ) %>%
     select(ds = scannedAt, y = marketValue) %>%
     mutate(item = item_name,
-           server = server)
+           server = server,
+           itemid = itemid)
 
   return(df)
 }
